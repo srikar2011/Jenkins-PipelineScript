@@ -113,6 +113,12 @@ pipeline {
         if ($LASTEXITCODE -ne 0) { Write-Host "ERROR: Extract failed"; exit 1 }
 
         Write-Host "Terraform artifact ready:"
+        if (Test-Path terraform) {
+        Get-ChildItem terraform | Select Name
+                                 } 
+        else {
+        Write-Host "terraform folder not found"
+              }
         Get-Location
         Get-ChildItem terraform/ | Select-Object Name
       '''
