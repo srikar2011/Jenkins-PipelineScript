@@ -118,10 +118,6 @@ pipeline {
                    -o "artifacts/$tfFile" `
                    "$env:NEXUS_URL/repository/$env:TF_REPO/$tfFile"
 
-          Write-Host "Checking the contents of $tfFile"
-
-          Get-Content "artifacts/$tfFile"
-
           if ($LASTEXITCODE -ne 0) {
             Write-Host "Artifact download failed"
             exit 1
