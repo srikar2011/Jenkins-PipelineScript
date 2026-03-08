@@ -119,13 +119,13 @@ pipeline {
         Write-Host "Downloading: $tfFile"
         curl.exe -s -w "`nHTTP Status: %{http_code}`n" `
           -u "$env:NEXUS_USER`:$env:NEXUS_PASS" `
-          -o "terraform\$tfFile" `
+          -o "terraform/$tfFile" `
           "$env:NEXUS_URL/repository/$env:TF_REPO/$tfFile"
 
         if ($LASTEXITCODE -ne 0) { Write-Host "ERROR: Download failed"; exit 1 }
 
         Write-Host "Extracting $tfFile..."
-        tar -xzf "terraform\$tfFile" -C terraform/
+        tar -xzf "terraform/$tfFile" -C terraform/
         if ($LASTEXITCODE -ne 0) { Write-Host "ERROR: Extract failed"; exit 1 }
 
         Write-Host "Terraform artifact ready:"
@@ -172,13 +172,13 @@ pipeline {
         Write-Host "Downloading: $chefFile"
         curl.exe -s -w "`nHTTP Status: %{http_code}`n" `
           -u "$env:NEXUS_USER`:$env:NEXUS_PASS" `
-          -o "chef\$chefFile" `
+          -o "chef/$chefFile" `
           "$env:NEXUS_URL/repository/$env:CHEF_REPO/$chefFile"
 
         if ($LASTEXITCODE -ne 0) { Write-Host "ERROR: Download failed"; exit 1 }
 
         Write-Host "Extracting $chefFile..."
-        tar -xzf "chef\$chefFile" -C chef/
+        tar -xzf "chef/$chefFile" -C chef/
         if ($LASTEXITCODE -ne 0) { Write-Host "ERROR: Extract failed"; exit 1 }
 
         Write-Host "Chef artifact ready:"
