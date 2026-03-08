@@ -223,9 +223,6 @@ pipeline {
           $class: 'AmazonWebServicesCredentialsBinding',
           credentialsId: 'aws-credentials']]) {
           powershell '''
-            $env:PATH = "C://tools//terraform;$env:PATH"
-            Set-Location terraform
-
             Write-Host "Checking existing Terraform state..."
             $stateList = terraform state list 2>$null
             if ($stateList) {
