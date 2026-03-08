@@ -29,23 +29,7 @@ pipeline {
   }
 
   stages {
-    
-    stage('Clean Workspace') {
-      steps {
-       powershell '''
-      Write-Host "Cleaning workspace from any previous builds..."
-      Remove-Item -Force "*.tar.gz"              -ErrorAction SilentlyContinue
-      Remove-Item -Force "*.json"                -ErrorAction SilentlyContinue
-      Remove-Item -Recurse -Force "terraform"    -ErrorAction SilentlyContinue
-      Remove-Item -Recurse -Force "chef"         -ErrorAction SilentlyContinue
-      Remove-Item -Force "tf_outputs.json"       -ErrorAction SilentlyContinue
-      Write-Host "Workspace clean"
-    '''
-  }
-}
-    
-    
-    stage('Pre-Flight Check') {
+       stage('Pre-Flight Check') {
       steps {
         withCredentials([[
           $class: 'AmazonWebServicesCredentialsBinding',
