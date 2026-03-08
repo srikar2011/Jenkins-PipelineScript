@@ -122,7 +122,7 @@ pipeline {
             exit 1
           }
 
-          tar -xzf "terraform/$tfFile" -C terraform/
+          tar -xzf "terraform/$tfFile" -C terraform/ --overwrite
 
           if (!(Test-Path "terraform/main.tf")) {
             Write-Host "ERROR: Terraform artifact corrupted"
