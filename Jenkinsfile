@@ -91,6 +91,7 @@ pipeline {
           powershell '''
 
           New-Item terraform -ItemType Directory -Force | Out-Null
+          New-Item artifacts -ItemType Directory -Force | Out-Null
 
           if ($env:TF_ARTIFACT_BUILD -eq "latest") {
 
@@ -114,15 +115,19 @@ pipeline {
           Write-Host "Downloading $tfFile"
 
           curl.exe -u "$env:NEXUS_USER`:$env:NEXUS_PASS" `
-                   -o "terraform/$tfFile" `
+                   -o "artifacts/$tfFile" `
                    "$env:NEXUS_URL/repository/$env:TF_REPO/$tfFile"
+
+          Write-Host "Checking the contents of $tfFile"
+
+          Get-Content "artifacts/$tfFile"
 
           if ($LASTEXITCODE -ne 0) {
             Write-Host "Artifact download failed"
             exit 1
           }
 
-          tar -xzf "terraform/$tfFile" -C terraform/ --overwrite
+          tar -xzf "artifacts/$tfFile" -C terraform/
 
           if (!(Test-Path "terraform/main.tf")) {
             Write-Host "ERROR: Terraform artifact corrupted"
