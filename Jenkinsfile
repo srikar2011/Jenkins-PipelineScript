@@ -267,37 +267,6 @@ pipeline {
       }
     }
 
-    stage('Wait For EC2 Ready') {
-
-      when {
-        expression { params.APPLY_TERRAFORM && !params.DESTROY }
-      }
-
-      steps {
-
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding',
-          credentialsId: 'aws-credentials'
-        ]]) {
-
-          powershell '''
-
-          $outputs = Get-Content tf_outputs.json | ConvertFrom-Json
-          $ec2Id = $outputs.ec2_instance_id.value
-
-          Write-Host "Waiting for instance: $ec2Id"
-
-          aws ec2 wait instance-status-ok `
-            --instance-ids $ec2Id `
-            --region $env:AWS_REGION
-
-          Start-Sleep -Seconds 90
-
-          '''
-        }
-      }
-    }
-
     stage('Upload Chef Cookbooks') {
 
       when {
