@@ -540,7 +540,6 @@ module "database" {
             "Approve deployment to ${params.ENVIRONMENT.toUpperCase()}?"
           input message: msg,
                 ok: params.DESTROY ? "Yes Destroy" : "Approve",
-                submitter: "admin"
         }
       }
     }
