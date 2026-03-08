@@ -539,7 +539,7 @@ module "database" {
             "CONFIRM DESTROY of ${params.ENVIRONMENT} infrastructure?" :
             "Approve deployment to ${params.ENVIRONMENT.toUpperCase()}?"
           input message: msg,
-                ok: params.DESTROY ? "Yes Destroy" : "Approve",
+                ok: params.DESTROY ? "Yes Destroy" : "Approve"
         }
       }
     }
