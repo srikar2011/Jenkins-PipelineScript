@@ -37,7 +37,7 @@ pipeline {
     STATE_BUCKET = 'terraform-state-364829013514'
     S3_BUCKET    = 'devops-chef-cookbooks-364829013514'
 
-    SLACK_CHANNEL = '#devops-builds'
+    SLACK_CHANNEL = '#jenkins'
   }
 
   stages {
