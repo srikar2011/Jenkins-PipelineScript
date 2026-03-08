@@ -218,9 +218,9 @@ pipeline {
         }
 
         '''
-
+            }
         archiveArtifacts artifacts: 'terraform/tfplan'
-      }
+            }
     }
 
     stage('Approval Gate') {
@@ -262,6 +262,7 @@ pipeline {
           terraform output -json > ../tf_outputs.json
 
           '''
+            }
         }
       }
     }
