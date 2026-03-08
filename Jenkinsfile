@@ -192,6 +192,11 @@ pipeline {
 
       steps {
 
+          withCredentials([[
+              $class: 'AmazonWebServicesCredentialsBinding',
+              credentialsId: 'aws-credentials'
+            ]]) {
+
         powershell '''
 
         $env:PATH="$env:TF_PATH;$env:PATH"
