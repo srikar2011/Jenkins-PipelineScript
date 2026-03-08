@@ -334,7 +334,6 @@ pipeline {
   *Job:* ${env.JOB_NAME}
   *Build:* #${env.BUILD_NUMBER}
   *Duration:* ${currentBuild.durationString}
-  *Artifact:* terraform-infra-${env.BUILD_NUMBER}.tar.gz pushed to Nexus
   *URL:* ${env.BUILD_URL}
         """.trim()
       )
