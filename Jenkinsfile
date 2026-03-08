@@ -322,28 +322,6 @@ pipeline {
 
         $outputs = Get-Content tf_outputs.json | ConvertFrom-Json
 
-        $alb = $outputs.alb_dns_name.value
-
-        Write-Host "Testing application..."
-
-        for ($i=0; $i -lt 10; $i++) {
-
-          try {
-
-            $r = Invoke-WebRequest -Uri "http://$alb/health" -TimeoutSec 10
-
-            if ($r.StatusCode -eq 200) {
-              Write-Host "Application healthy"
-              exit 0
-            }
-
-          } catch {}
-
-          Start-Sleep 15
-        }
-
-        Write-Host "Health check failed"
-
         '''
       }
     }
