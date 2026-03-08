@@ -387,7 +387,7 @@ module "database" {
 
           # Write generated main.tf without BOM
           $utf8NoBom = New-Object System.Text.UTF8Encoding $false
-          [System.IO.File]::WriteAllText("$PWD\main.tf", $mainTf, $utf8NoBom)
+          [System.IO.File]::WriteAllText("$PWD/main.tf", $mainTf, $utf8NoBom)
 
           Write-Host ""
           Write-Host "=========================================="
